@@ -7,7 +7,10 @@ int main(void)
 	a.path = "./map/map.ber";
 	game.mlx = mlx_init(); //bağlantı kuruyor display ile software bağlantı
 	game.window = mlx_new_window(game.mlx, 1920, 1080, "Hello world!");
-	mlx_hook(game.window, ON_KEYDOWN, 1L << 0, game_exit, &game);
-	create_map(game, a);
+	/* game.player.x = 48;
+	game.player.y = 192; */
+	create_map(&game, a);
+	konumhesapla(&game);
+	mlx_hook(game.window, ON_KEYDOWN, 1L << 0, key_check, &game);
 	mlx_loop(game.mlx);
 }
