@@ -6,6 +6,7 @@ int	key_check(int key_code, t_game *game)
 	{
 		mlx_destroy_window(game->mlx, game->window);
 		printf(RED"Game Exit\n"ENDC);
+		printf(RED"COİN****%d\n"ENDC,game->player.coin);
 		exit (0);
 	}
 	if (key_code == UP)
@@ -39,21 +40,22 @@ void right(t_game *game)
 	int j = game->player.x + 48;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
-		guncel(game);
+		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
 		put_image(image,j,i);
 	}
 	
 }
-void guncel(t_game *game)
+void guncel(t_game *game,int x,int y)
 {
 	t_image image;
 	image.relative_path = "./img/floor.xpm";
 	image.wlx = *game;
-	int i = game->player.y;
-	int j = game->player.x;
-	put_image(image,j,i);
+	/* int i = game->player.y;
+	int j = game->player.x; */
+	put_image(image,game->player.x,game->player.y);
+	put_image(image,x,y);
 }
 void left(t_game *game)
 {
@@ -64,7 +66,7 @@ void left(t_game *game)
 	int j = game->player.x - 48;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
-		guncel(game);
+		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
 		put_image(image,j,i);
@@ -79,7 +81,7 @@ void up(t_game *game)
 	int j = game->player.x;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
-		guncel(game);
+		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
 		put_image(image,j,i);
@@ -94,7 +96,7 @@ void down(t_game *game)
 	int j = game->player.x;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
-		guncel(game);
+		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
 		put_image(image,j,i);

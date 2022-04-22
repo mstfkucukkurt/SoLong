@@ -84,8 +84,7 @@ void create_map(t_game *wlx, t_platform platform)
 	int		fd;
 	char 	*area;
 	int		i;
-     wlx->map = (char **)malloc(sizeof(char *) * (9999));
-
+    wlx->map = (char **)malloc(sizeof(char *) * (9999));
 	fd = open(platform.path, O_RDONLY);
 	i = 0;
 	while (i < 9999)
@@ -102,16 +101,18 @@ void	konumhesapla(t_game	*game)
 {
 	int i = 0;
 	int j = 0;
+	game->coincheck = 0;
 	 while(game->map[i])
     {
         j = 0;
         while(game->map[i][j])
         {
+			if (game->map[i][j] == 'C')
+				game->coincheck++;
 			if (game->map[i][j] == 'P')
 			{
 				game->player.x = j * 48;
 				game->player.y = i * 48;
-				break;
 			}
         j++;
         }
@@ -123,6 +124,22 @@ int mapcheck(t_game *game,int i,int j)
 	if (game->map[i][j] == '1')
 	{
 		return(1);
+	}		
+	else if (game->map[i][j] == 'C')
+	{
+		game->player.coin++;
+		game->map[i][j] = '0';
+	}
+	else if (game->map[i][j] == 'E')
+	{
+		if (game->player.coin != game->coincheck)
+		{
+			printf(RED"COİNLERİ TOPLA SALAK\n"ENDC);
+			return (1);
+		}	
+				exit(0);
+	return (0);
 	}
 	return(0);
 }
+//player ilerleyince coin ise önce zemin sonra karakter bas

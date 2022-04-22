@@ -22,6 +22,7 @@ typedef struct	s_player
 {
 	int      x;
 	int      y;
+	int		coin;
 
 }				t_player;
 typedef struct	s_game
@@ -30,6 +31,7 @@ typedef struct	s_game
 	void	*window;
     char    **map;
 	t_player   player;
+	int	      coincheck;
 
 }				t_game;
 typedef struct s_image//put image fonksiyonu için lazım
@@ -75,7 +77,7 @@ void right(t_game *game);
 void down(t_game *game);
 void left(t_game *game);
 void up(t_game *game);
-void guncel(t_game *game);
+void guncel(t_game *game,int x,int y);
 void d(t_game *game,t_image *image);
 void	konumhesapla(t_game	*game);
 int mapcheck(t_game *game,int i,int j);
