@@ -6,27 +6,26 @@ int	key_check(int key_code, t_game *game)
 	{
 		mlx_destroy_window(game->mlx, game->window);
 		printf(RED"Game Exit\n"ENDC);
-		printf(RED"COİN****%d\n"ENDC,game->player.coin);
 		exit (0);
 	}
 	if (key_code == UP)
 	{
-		printf(RED"up\n"ENDC);
+	/* 	printf(RED"up\n"ENDC); */
 		up(game);
 	}
 	if (key_code == RIGHT)
 	{
-		printf(RED"RIGHT\n"ENDC);
+		/* printf(RED"RIGHT\n"ENDC); */
 		right(game);
 	}
 	if (key_code == LEFT)
 	{
-		printf(RED"LEFT\n"ENDC);
+	/* 	printf(RED"LEFT\n"ENDC); */
 		left(game);
 	}
 	if (key_code == DOWN)
 	{
-		printf(RED"DOWN\n"ENDC);
+	/* 	printf(RED"DOWN\n"ENDC); */
 		down(game);
 	}
 	return (0);
@@ -40,6 +39,8 @@ void right(t_game *game)
 	int j = game->player.x + 48;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
+		game->player.hareket++;
+		printf(RED"Hareket sayisi%d\n"ENDC,game->player.hareket);
 		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
@@ -66,6 +67,8 @@ void left(t_game *game)
 	int j = game->player.x - 48;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
+		game->player.hareket++;
+		printf(RED"Hareket sayisi%d\n"ENDC,game->player.hareket);
 		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
@@ -81,6 +84,8 @@ void up(t_game *game)
 	int j = game->player.x;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
+		game->player.hareket++;
+		printf(RED"Hareket sayisi%d\n"ENDC,game->player.hareket);
 		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;
@@ -96,6 +101,8 @@ void down(t_game *game)
 	int j = game->player.x;
 	if ((mapcheck(game,(i/48),(j/48)) != 1))
 	{
+		game->player.hareket++;
+		printf(RED"Hareket sayisi%d\n"ENDC,game->player.hareket);
 		guncel(game,j,i);
 		game->player.y = i;
 		game->player.x = j;

@@ -23,6 +23,7 @@ typedef struct	s_player
 	int      x;
 	int      y;
 	int		coin;
+	int		hareket;
 
 }				t_player;
 typedef struct	s_game
@@ -32,15 +33,16 @@ typedef struct	s_game
     char    **map;
 	t_player   player;
 	int	      coincheck;
-
+	int		size_x;
+	int		size_y;
+	int		sizeofx;
+	int  	sizeofy;
 }				t_game;
 typedef struct s_image//put image fonksiyonu için lazım
 {
 	char*				relative_path;
 	struct s_game		wlx;
 	void 				*img;
-	int					x;
-	int 				y;
 	int					img_height;
 	int					img_width;
 }	t_image;
@@ -50,12 +52,6 @@ typedef struct s_block //img dosyamdaki görüntüleri basmak için
 	char	*name;
 	char	*relative_path;
 }	t_block;
-
-
-typedef struct s_platform
-{
-	char	*path;
-}	t_platform;
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -69,7 +65,7 @@ enum {
 int	key_check(int key_code, t_game *game);
 char *get_next_line(int fd);
 void *myfree(void *str);
-void create_map(t_game *wlx, t_platform platform);
+void create_map(t_game *wlx, char **argv);
 void create_map_line(char *area, t_game *wlx, int i);
 void *put_image(t_image image,int x,int y);
 void ekranabas(t_game game,int i);
@@ -81,4 +77,12 @@ void guncel(t_game *game,int x,int y);
 void d(t_game *game,t_image *image);
 void	konumhesapla(t_game	*game);
 int mapcheck(t_game *game,int i,int j);
+void	ft_window_size(t_game *data, char **argv);
+void  kontrol(t_game  *game);
+void	abc(char *error_msg);
+
+
+int	ft_count_lines(int fd);
+int	ft_line_length(int fd);
+
 #endif
